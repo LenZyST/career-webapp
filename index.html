@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Карьерный кабинет</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <style>
+    body { font-family: Arial; padding: 16px; }
+    .card { padding: 12px; margin-bottom: 12px; border-radius: 10px; background: #f3f3f3; }
+    button { padding: 10px; width: 100%; border-radius: 8px; border: none; }
+  </style>
+</head>
+<body>
+
+<h2>👤 Карьерный профиль</h2>
+<div class="card" id="profile">Загрузка...</div>
+
+<h2>📈 План развития</h2>
+<div class="card" id="plan">Нажми кнопку ниже</div>
+
+<button onclick="requestPlan()">📅 Получить план 30 / 60 / 90</button>
+
+<script>
+  const tg = window.Telegram.WebApp;
+  tg.expand();
+
+  document.getElementById("profile").innerText =
+    "Данные подтягиваются из бота";
+
+  function requestPlan() {
+    tg.sendData(JSON.stringify({ action: "plan_30_60_90" }));
+    document.getElementById("plan").innerText = "Запрос отправлен в бота";
+  }
+</script>
+
+</body>
+</html>
