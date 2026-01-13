@@ -3,35 +3,146 @@
 <head>
   <meta charset="UTF-8" />
   <title>Карьерный кабинет</title>
+
+  <!-- Telegram Web App -->
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+  <!-- Шрифт -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
   <style>
-    body { font-family: Arial; padding: 16px; }
-    .card { padding: 12px; margin-bottom: 12px; border-radius: 10px; background: #f3f3f3; }
-    button { padding: 10px; width: 100%; border-radius: 8px; border: none; }
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(180deg, #f6f8ff, #ffffff);
+      color: #1f2937;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    h2 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 14px;
+      color: #6b7280;
+      line-height: 1.5;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: #eef2ff;
+      color: #4338ca;
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .button {
+      width: 100%;
+      padding: 18px;
+      font-size: 16px;
+      font-weight: 700;
+      border-radius: 14px;
+      border: none;
+      cursor: pointer;
+      margin-top: 12px;
+    }
+
+    .primary {
+      background: linear-gradient(90deg, #6366f1, #4f46e5);
+      color: white;
+    }
+
+    .secondary {
+      background: #f3f4f6;
+      color: #111827;
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 12px;
+      color: #9ca3af;
+      margin-top: 24px;
+    }
   </style>
 </head>
+
 <body>
 
-<h2>👤 Карьерный профиль</h2>
-<div class="card" id="profile">Загрузка...</div>
+  <h1>🧭 Карьерная консультация</h1>
+  <p>Персональный кабинет для твоего профессионального роста</p>
 
-<h2>📈 План развития</h2>
-<div class="card" id="plan">Нажми кнопку ниже</div>
+  <div class="card">
+    <div class="badge">👤 Твой профиль</div>
+    <p>
+      Интересы, навыки и формат работы хранятся в боте.<br>
+      Используй команду <b>/profile</b>, чтобы посмотреть или обновить данные.
+    </p>
+  </div>
 
-<button onclick="requestPlan()">📅 Получить план 30 / 60 / 90</button>
+  <div class="card">
+    <div class="badge">📈 План развития</div>
+    <h2>30 / 60 / 90 дней</h2>
+    <p>
+      Я подготовлю для тебя пошаговый план:
+      от первых шагов до уверенного движения к профессии.
+    </p>
 
-<script>
-  const tg = window.Telegram.WebApp;
-  tg.expand();
+    <button class="button primary" id="planBtn">
+      📅 Получить план развития
+    </button>
+  </div>
 
-  document.getElementById("profile").innerText =
-    "Данные подтягиваются из бота";
+  <div class="card">
+    <div class="badge">💬 Подсказка</div>
+    <p>
+      После нажатия кнопки план придёт <b>прямо в чат с ботом</b>.
+    </p>
+  </div>
 
-  function requestPlan() {
-    tg.sendData(JSON.stringify({ action: "plan_30_60_90" }));
-    document.getElementById("plan").innerText = "Запрос отправлен в бота";
-  }
-</script>
+  <div class="footer">
+    AI карьерный консультант · Telegram
+  </div>
+
+  <script>
+    const tg = window.Telegram.WebApp;
+    tg.expand();
+
+    const planBtn = document.getElementById("planBtn");
+
+    planBtn.addEventListener("click", () => {
+      tg.MainButton.setText("📨 Получить план 30 / 60 / 90");
+      tg.MainButton.show();
+
+      tg.MainButton.onClick(() => {
+        tg.sendData(JSON.stringify({
+          action: "plan_30_60_90"
+        }));
+        tg.close();
+      });
+    });
+  </script>
 
 </body>
 </html>
