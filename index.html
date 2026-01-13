@@ -109,9 +109,6 @@
       от первых шагов до уверенного движения к профессии.
     </p>
 
-    <button class="button primary" id="planBtn">
-      📅 Получить план развития
-    </button>
   </div>
 
   <div class="card">
@@ -125,24 +122,22 @@
     AI карьерный консультант · Telegram
   </div>
 
-  <script>
-    const tg = window.Telegram.WebApp;
-    tg.expand();
+<script>
+  const tg = window.Telegram.WebApp;
+  tg.expand();
 
-    const planBtn = document.getElementById("planBtn");
+  // Сразу настраиваем MainButton
+  tg.MainButton.setText("📅 Получить план 30 / 60 / 90");
+  tg.MainButton.show();
 
-    planBtn.addEventListener("click", () => {
-      tg.MainButton.setText("📨 Получить план 30 / 60 / 90");
-      tg.MainButton.show();
-
-      tg.MainButton.onClick(() => {
-        tg.sendData(JSON.stringify({
-          action: "plan_30_60_90"
-        }));
-        tg.close();
-      });
-    });
-  </script>
+  // ВАЖНО: onClick ТОЛЬКО ОДИН РАЗ
+  tg.MainButton.onClick(() => {
+    tg.sendData(JSON.stringify({
+      action: "plan_30_60_90"
+    }));
+    tg.close();
+  });
+</script>
 
 </body>
 </html>
