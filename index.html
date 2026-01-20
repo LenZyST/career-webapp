@@ -4,10 +4,8 @@
   <meta charset="UTF-8">
   <title>Карьерный кабинет</title>
 
-  <!-- Telegram Web App JS -->
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
-  <!-- Шрифт -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -87,19 +85,14 @@
   </div>
 
   <script>
-    // Получаем объект Telegram WebApp
     const tg = window.Telegram.WebApp;
     tg.expand();
 
-    // Настраиваем MainButton
     tg.MainButton.setText("📅 Получить план 30 / 60 / 90");
     tg.MainButton.show();
 
-    // Обработчик клика (один раз)
     tg.MainButton.onClick(() => {
-      // Отправка данных в бот
       tg.sendData(JSON.stringify({ action: "plan_30_60_90" }));
-      // Закрываем Web App
       tg.close();
     });
   </script>
